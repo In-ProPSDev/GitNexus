@@ -1646,5 +1646,6 @@ export const LANGUAGE_QUERIES: Record<SupportedLanguages, string> = {
   [SupportedLanguages.Swift]: SWIFT_QUERIES,
   [SupportedLanguages.Dart]: DART_QUERIES,
   [SupportedLanguages.Vue]: TYPESCRIPT_QUERIES, // Vue <script> blocks are parsed as TypeScript
+  [SupportedLanguages.PowerShell]: '', // Standalone regex processor — no tree-sitter queries
   [SupportedLanguages.Cobol]: '', // Standalone regex processor — no tree-sitter queries
 };

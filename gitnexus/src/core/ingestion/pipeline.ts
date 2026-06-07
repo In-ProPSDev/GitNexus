@@ -25,6 +25,7 @@ import {
   structurePhase,
   markdownPhase,
   cobolPhase,
+  powershellPhase,
   parsePhase,
   routesPhase,
   toolsPhase,
@@ -137,7 +138,7 @@ export interface PipelineOptions {
  *
  * Phase dependency graph:
  *
- *   scan → structure → [markdown, cobol] → parse → [routes, tools, orm]
+ *   scan → structure → [markdown, cobol, powershell] → parse → [routes, tools, orm]
  *     → crossFile → scopeResolution → pruneLocalSymbols
  *     → mro → communities → processes
  *
@@ -150,6 +151,7 @@ function buildPhaseList(options?: PipelineOptions): PipelinePhase[] {
     structurePhase,
     markdownPhase,
     cobolPhase,
+    powershellPhase,
     parsePhase,
     routesPhase,
     toolsPhase,

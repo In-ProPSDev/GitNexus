@@ -138,6 +138,16 @@ describe('getLanguageFromFilename', () => {
     });
   });
 
+  describe('PowerShell', () => {
+    it.each(['.ps1', '.psm1', '.psd1'])('detects %s files', (ext) => {
+      expect(getLanguageFromFilename(`file${ext}`)).toBe(SupportedLanguages.PowerShell);
+    });
+
+    it('maps PowerShell files to Prism powershell syntax', () => {
+      expect(getSyntaxLanguageFromFilename('scripts/deploy.ps1')).toBe('powershell');
+    });
+  });
+
   describe('unsupported', () => {
     it.each(['.scala', '.r', '.lua', '.zig', '.txt', '.md', '.json', '.yaml'])(
       'returns null for %s files',
@@ -168,6 +178,11 @@ describe('getProviderForFile', () => {
     expect(getProviderForFile('vendor/mage-os/templates/product/list.phtml')?.id).toBe(
       SupportedLanguages.PHP,
     );
+  });
+
+  it('routes PowerShell files to the standalone PowerShell provider', () => {
+    expect(getProviderForFile('scripts/deploy.ps1')?.id).toBe(SupportedLanguages.PowerShell);
+    expect(getProviderForFile('modules/UserTools.psm1')?.id).toBe(SupportedLanguages.PowerShell);
   });
 });
 
